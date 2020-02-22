@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.ProcNeedMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.ProcNeed">
+    <id column="supply_procedure_id" jdbcType="INTEGER" property="supplyProcedureId" />
+    <result column="supply_need_id" jdbcType="INTEGER" property="supplyNeedId" />
+    <result column="supply_id" jdbcType="INTEGER" property="supplyId" />
+    <result column="package_id" jdbcType="INTEGER" property="packageId" />
+    <result column="procedure_id" jdbcType="INTEGER" property="procedureId" />
+    <result column="used_num" jdbcType="SMALLINT" property="usedNum" />
+    <result column="recycle_num" jdbcType="SMALLINT" property="recycleNum" />
+    <result column="is_checked" jdbcType="BIT" property="isChecked" />
+    <result column="deploy_id" jdbcType="INTEGER" property="deployId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    supply_procedure_id, supply_need_id, supply_id, package_id, procedure_id, used_num, 
+    recycle_num, is_checked, deploy_id, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_supply_proc_need
+    where supply_procedure_id = #{supplyProcedureId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByCondition" parameterType="com.chaikai.safetycontrol.pojo.ProcNeed" resultMap="BaseResultMap">
+    select * from safety_supply_proc_need where 1=1
+    <if test="supplyProcedureId != null">
+      and supply_procedure_id = #{supplyProcedureId,jdbcType=INTEGER}
+    </if>
+    <if test="supplyNeedId != null">
+      and supply_need_id = #{supplyNeedId,jdbcType=INTEGER}
+    </if>
+    <if test="packageId != null" >
+      and package_id = #{packageId, jdbcType = INTEGER}
+    </if>
+    <if test="procedureId != null">
+      and procedure_id = #{procedureId,jdbcType=INTEGER}
+    </if>
+    <if test="supplyId != null">
+      and supply_id = #{supplyId,jdbcType=INTEGER}
+    </if>
+    <if test="usedNum != null">
+      and used_num = #{usedNum,jdbcType=SMALLINT}
+    </if>
+    <if test="recycleNum != null">
+      and recycle_num = #{recycleNum,jdbcType=SMALLINT}
+    </if>
+    <if test="isChecked != null">
+      and is_checked = #{isChecked,jdbcType=BIT}
+    </if>
+    <if test="deployId != null">
+      and deploy_id = #{deployId,jdbcType=INTEGER}
+    </if>
+    <if test="description != null">
+      and description = #{description,jdbcType=VARCHAR}
+    </if>
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_supply_proc_need
+    where supply_procedure_id = #{supplyProcedureId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="supply_procedure_id" keyProperty="supplyProcedureId" parameterType="com.chaikai.safetycontrol.pojo.ProcNeed" useGeneratedKeys="true">
+    insert into safety_supply_proc_need (supply_need_id, supply_id, package_id, 
+      procedure_id, used_num, recycle_num, 
+      is_checked, deploy_id, description
+      )
+    values (#{supplyNeedId,jdbcType=INTEGER}, #{supplyId,jdbcType=INTEGER}, #{packageId,jdbcType=INTEGER}, 
+      #{procedureId,jdbcType=INTEGER}, #{usedNum,jdbcType=SMALLINT}, #{recycleNum,jdbcType=SMALLINT}, 
+      #{isChecked,jdbcType=BIT}, #{deployId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="supply_procedure_id" keyProperty="supplyProcedureId" parameterType="com.chaikai.safetycontrol.pojo.ProcNeed" useGeneratedKeys="true">
+    insert into safety_supply_proc_need
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplyNeedId != null">
+        supply_need_id,
+      </if>
+      <if test="supplyId != null">
+        supply_id,
+      </if>
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="procedureId != null">
+        procedure_id,
+      </if>
+      <if test="usedNum != null">
+        used_num,
+      </if>
+      <if test="recycleNum != null">
+        recycle_num,
+      </if>
+      <if test="isChecked != null">
+        is_checked,
+      </if>
+      <if test="deployId != null">
+        deploy_id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplyNeedId != null">
+        #{supplyNeedId,jdbcType=INTEGER},
+      </if>
+      <if test="supplyId != null">
+        #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="packageId != null">
+        #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null">
+        #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="usedNum != null">
+        #{usedNum,jdbcType=SMALLINT},
+      </if>
+      <if test="recycleNum != null">
+        #{recycleNum,jdbcType=SMALLINT},
+      </if>
+      <if test="isChecked != null">
+        #{isChecked,jdbcType=BIT},
+      </if>
+      <if test="deployId != null">
+        #{deployId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.ProcNeed">
+    update safety_supply_proc_need
+    <set>
+      <if test="supplyNeedId != null">
+        supply_need_id = #{supplyNeedId,jdbcType=INTEGER},
+      </if>
+      <if test="supplyId != null">
+        supply_id = #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null">
+        procedure_id = #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="usedNum != null">
+        used_num = #{usedNum,jdbcType=SMALLINT},
+      </if>
+      <if test="recycleNum != null">
+        recycle_num = #{recycleNum,jdbcType=SMALLINT},
+      </if>
+      <if test="isChecked != null">
+        is_checked = #{isChecked,jdbcType=BIT},
+      </if>
+      <if test="deployId != null">
+        deploy_id = #{deployId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supply_procedure_id = #{supplyProcedureId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.ProcNeed">
+    update safety_supply_proc_need
+    set supply_need_id = #{supplyNeedId,jdbcType=INTEGER},
+      supply_id = #{supplyId,jdbcType=INTEGER},
+      package_id = #{packageId,jdbcType=INTEGER},
+      procedure_id = #{procedureId,jdbcType=INTEGER},
+      used_num = #{usedNum,jdbcType=SMALLINT},
+      recycle_num = #{recycleNum,jdbcType=SMALLINT},
+      is_checked = #{isChecked,jdbcType=BIT},
+      deploy_id = #{deployId,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR}
+    where supply_procedure_id = #{supplyProcedureId,jdbcType=INTEGER}
+  </update>
+</mapper>

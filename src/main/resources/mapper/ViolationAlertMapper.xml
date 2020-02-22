@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.ViolationAlertMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.ViolationAlert">
+    <id column="alert_id" jdbcType="INTEGER" property="alertId" />
+    <result column="alert_info" jdbcType="VARCHAR" property="alertInfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    alert_id, alert_info
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_violation_alert
+    where alert_id = #{alertId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_violation_alert
+    where alert_id = #{alertId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="alert_id" keyProperty="alertId" parameterType="com.chaikai.safetycontrol.pojo.ViolationAlert" useGeneratedKeys="true">
+    insert into safety_violation_alert (alert_info)
+    values (#{alertInfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="alert_id" keyProperty="alertId" parameterType="com.chaikai.safetycontrol.pojo.ViolationAlert" useGeneratedKeys="true">
+    insert into safety_violation_alert
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="alertInfo != null">
+        alert_info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="alertInfo != null">
+        #{alertInfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.ViolationAlert">
+    update safety_violation_alert
+    <set>
+      <if test="alertInfo != null">
+        alert_info = #{alertInfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where alert_id = #{alertId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.ViolationAlert">
+    update safety_violation_alert
+    set alert_info = #{alertInfo,jdbcType=VARCHAR}
+    where alert_id = #{alertId,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.SupplyDetailMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.SupplyDetail">
+    <id column="supply_detail_id" jdbcType="INTEGER" property="supplyDetailId" />
+    <result column="alert_id" jdbcType="INTEGER" property="alertId" />
+    <result column="supply_id" jdbcType="INTEGER" property="supplyId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    supply_detail_id, alert_id, supply_id, status, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_supply_detail
+    where supply_detail_id = #{supplyDetailId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_supply_detail
+    where supply_detail_id = #{supplyDetailId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="supply_detail_id" keyProperty="supplyDetailId" parameterType="com.chaikai.safetycontrol.pojo.SupplyDetail" useGeneratedKeys="true">
+    insert into safety_supply_detail (alert_id, supply_id, status, 
+      description)
+    values (#{alertId,jdbcType=INTEGER}, #{supplyId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="supply_detail_id" keyProperty="supplyDetailId" parameterType="com.chaikai.safetycontrol.pojo.SupplyDetail" useGeneratedKeys="true">
+    insert into safety_supply_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="alertId != null">
+        alert_id,
+      </if>
+      <if test="supplyId != null">
+        supply_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="alertId != null">
+        #{alertId,jdbcType=INTEGER},
+      </if>
+      <if test="supplyId != null">
+        #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.SupplyDetail">
+    update safety_supply_detail
+    <set>
+      <if test="alertId != null">
+        alert_id = #{alertId,jdbcType=INTEGER},
+      </if>
+      <if test="supplyId != null">
+        supply_id = #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supply_detail_id = #{supplyDetailId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.SupplyDetail">
+    update safety_supply_detail
+    set alert_id = #{alertId,jdbcType=INTEGER},
+      supply_id = #{supplyId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where supply_detail_id = #{supplyDetailId,jdbcType=INTEGER}
+  </update>
+</mapper>

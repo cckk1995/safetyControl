@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.ViolationFlowMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.ViolationFlow">
+    <id column="violation_flow_id" jdbcType="INTEGER" property="violationFlowId" />
+    <result column="violation_id" jdbcType="INTEGER" property="violationId" />
+    <result column="status" jdbcType="TINYINT" property="status" />
+    <result column="by_who" jdbcType="VARCHAR" property="byWho" />
+    <result column="in_time" jdbcType="TIMESTAMP" property="inTime" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    violation_flow_id, violation_id, status, by_who, in_time, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_violation_flow
+    where violation_flow_id = #{violationFlowId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_violation_flow
+    where violation_flow_id = #{violationFlowId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="violation_flow_id" keyProperty="violationFlowId" parameterType="com.chaikai.safetycontrol.pojo.ViolationFlow" useGeneratedKeys="true">
+    insert into safety_violation_flow (violation_id, status, by_who, 
+      in_time, description)
+    values (#{violationId,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{byWho,jdbcType=VARCHAR}, 
+      #{inTime,jdbcType=TIMESTAMP}, #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="violation_flow_id" keyProperty="violationFlowId" parameterType="com.chaikai.safetycontrol.pojo.ViolationFlow" useGeneratedKeys="true">
+    insert into safety_violation_flow
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="violationId != null">
+        violation_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="byWho != null">
+        by_who,
+      </if>
+      <if test="inTime != null">
+        in_time,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="violationId != null">
+        #{violationId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="byWho != null">
+        #{byWho,jdbcType=VARCHAR},
+      </if>
+      <if test="inTime != null">
+        #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.ViolationFlow">
+    update safety_violation_flow
+    <set>
+      <if test="violationId != null">
+        violation_id = #{violationId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="byWho != null">
+        by_who = #{byWho,jdbcType=VARCHAR},
+      </if>
+      <if test="inTime != null">
+        in_time = #{inTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where violation_flow_id = #{violationFlowId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.ViolationFlow">
+    update safety_violation_flow
+    set violation_id = #{violationId,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      by_who = #{byWho,jdbcType=VARCHAR},
+      in_time = #{inTime,jdbcType=TIMESTAMP},
+      description = #{description,jdbcType=VARCHAR}
+    where violation_flow_id = #{violationFlowId,jdbcType=INTEGER}
+  </update>
+</mapper>

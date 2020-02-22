@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.ViolationMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.Violation">
+    <id column="violation_id" jdbcType="INTEGER" property="violationId" />
+    <result column="violation_category_id" jdbcType="INTEGER" property="violationCategoryId" />
+    <result column="package_id" jdbcType="INTEGER" property="packageId" />
+    <result column="procedure_id" jdbcType="INTEGER" property="procedureId" />
+    <result column="violator" jdbcType="VARCHAR" property="violator" />
+    <result column="alert_id" jdbcType="INTEGER" property="alertId" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="start_time" jdbcType="TIMESTAMP" property="startTime" />
+    <result column="end_time" jdbcType="TIMESTAMP" property="endTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    violation_id, violation_category_id, package_id, procedure_id, violator, alert_id, 
+    status, description, start_time, end_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_violation
+    where violation_id = #{violationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_violation
+    where violation_id = #{violationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="violation_id" keyProperty="violationId" parameterType="com.chaikai.safetycontrol.pojo.Violation" useGeneratedKeys="true">
+    insert into safety_violation (violation_category_id, package_id, procedure_id, 
+      violator, alert_id, status, 
+      description, start_time, end_time
+      )
+    values (#{violationCategoryId,jdbcType=INTEGER}, #{packageId,jdbcType=INTEGER}, #{procedureId,jdbcType=INTEGER}, 
+      #{violator,jdbcType=VARCHAR}, #{alertId,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR}, #{startTime,jdbcType=TIMESTAMP}, #{endTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="violation_id" keyProperty="violationId" parameterType="com.chaikai.safetycontrol.pojo.Violation" useGeneratedKeys="true">
+    insert into safety_violation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="violationCategoryId != null">
+        violation_category_id,
+      </if>
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="procedureId != null">
+        procedure_id,
+      </if>
+      <if test="violator != null">
+        violator,
+      </if>
+      <if test="alertId != null">
+        alert_id,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="startTime != null">
+        start_time,
+      </if>
+      <if test="endTime != null">
+        end_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="violationCategoryId != null">
+        #{violationCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="packageId != null">
+        #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null">
+        #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="violator != null">
+        #{violator,jdbcType=VARCHAR},
+      </if>
+      <if test="alertId != null">
+        #{alertId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.Violation">
+    update safety_violation
+    <set>
+      <if test="violationCategoryId != null">
+        violation_category_id = #{violationCategoryId,jdbcType=INTEGER},
+      </if>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null">
+        procedure_id = #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="violator != null">
+        violator = #{violator,jdbcType=VARCHAR},
+      </if>
+      <if test="alertId != null">
+        alert_id = #{alertId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="startTime != null">
+        start_time = #{startTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="endTime != null">
+        end_time = #{endTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where violation_id = #{violationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.Violation">
+    update safety_violation
+    set violation_category_id = #{violationCategoryId,jdbcType=INTEGER},
+      package_id = #{packageId,jdbcType=INTEGER},
+      procedure_id = #{procedureId,jdbcType=INTEGER},
+      violator = #{violator,jdbcType=VARCHAR},
+      alert_id = #{alertId,jdbcType=INTEGER},
+      status = #{status,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      start_time = #{startTime,jdbcType=TIMESTAMP},
+      end_time = #{endTime,jdbcType=TIMESTAMP}
+    where violation_id = #{violationId,jdbcType=INTEGER}
+  </update>
+</mapper>

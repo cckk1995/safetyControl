@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.SafetySupplyMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.SafetySupply">
+    <id column="supply_id" jdbcType="INTEGER" property="supplyId" />
+    <result column="parent_id" jdbcType="INTEGER" property="parentId" />
+    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
+    <result column="has_child" jdbcType="BIT" property="hasChild" />
+    <result column="level" jdbcType="VARCHAR" property="level" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="model_number" jdbcType="VARCHAR" property="modelNumber" />
+    <result column="spec" jdbcType="VARCHAR" property="spec" />
+    <result column="unit" jdbcType="VARCHAR" property="unit" />
+    <result column="is_selected" jdbcType="BIT" property="isSelected" />
+    <result column="is_essential" jdbcType="BIT" property="isEssential" />
+    <result column="is_smart" jdbcType="BIT" property="isSmart" />
+    <result column="brand" jdbcType="VARCHAR" property="brand" />
+    <result column="origin" jdbcType="VARCHAR" property="origin" />
+    <result column="code" jdbcType="VARCHAR" property="code" />
+    <result column="num" jdbcType="SMALLINT" property="num" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    supply_id, parent_id, category_id, has_child, level, name, model_number, spec, unit, 
+    is_selected, is_essential, is_smart, brand, origin, code, num, description, picture
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_supply
+    where supply_id = #{supplyId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_supply
+    where supply_id = #{supplyId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="supply_id" keyProperty="supplyId" parameterType="com.chaikai.safetycontrol.pojo.SafetySupply" useGeneratedKeys="true">
+    insert into safety_supply (parent_id, category_id, has_child, 
+      level, name, model_number, 
+      spec, unit, is_selected, 
+      is_essential, is_smart, brand, 
+      origin, code, num, 
+      description, picture)
+    values (#{parentId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{hasChild,jdbcType=BIT}, 
+      #{level,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{modelNumber,jdbcType=VARCHAR}, 
+      #{spec,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{isSelected,jdbcType=BIT}, 
+      #{isEssential,jdbcType=BIT}, #{isSmart,jdbcType=BIT}, #{brand,jdbcType=VARCHAR}, 
+      #{origin,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR}, #{num,jdbcType=SMALLINT}, 
+      #{description,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="supply_id" keyProperty="supplyId" parameterType="com.chaikai.safetycontrol.pojo.SafetySupply" useGeneratedKeys="true">
+    insert into safety_supply
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        parent_id,
+      </if>
+      <if test="categoryId != null">
+        category_id,
+      </if>
+      <if test="hasChild != null">
+        has_child,
+      </if>
+      <if test="level != null">
+        level,
+      </if>
+      <if test="name != null">
+        name,
+      </if>
+      <if test="modelNumber != null">
+        model_number,
+      </if>
+      <if test="spec != null">
+        spec,
+      </if>
+      <if test="unit != null">
+        unit,
+      </if>
+      <if test="isSelected != null">
+        is_selected,
+      </if>
+      <if test="isEssential != null">
+        is_essential,
+      </if>
+      <if test="isSmart != null">
+        is_smart,
+      </if>
+      <if test="brand != null">
+        brand,
+      </if>
+      <if test="origin != null">
+        origin,
+      </if>
+      <if test="code != null">
+        code,
+      </if>
+      <if test="num != null">
+        num,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="parentId != null">
+        #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="hasChild != null">
+        #{hasChild,jdbcType=BIT},
+      </if>
+      <if test="level != null">
+        #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="modelNumber != null">
+        #{modelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="isSelected != null">
+        #{isSelected,jdbcType=BIT},
+      </if>
+      <if test="isEssential != null">
+        #{isEssential,jdbcType=BIT},
+      </if>
+      <if test="isSmart != null">
+        #{isSmart,jdbcType=BIT},
+      </if>
+      <if test="brand != null">
+        #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        #{num,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.SafetySupply">
+    update safety_supply
+    <set>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=INTEGER},
+      </if>
+      <if test="categoryId != null">
+        category_id = #{categoryId,jdbcType=INTEGER},
+      </if>
+      <if test="hasChild != null">
+        has_child = #{hasChild,jdbcType=BIT},
+      </if>
+      <if test="level != null">
+        level = #{level,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="modelNumber != null">
+        model_number = #{modelNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="spec != null">
+        spec = #{spec,jdbcType=VARCHAR},
+      </if>
+      <if test="unit != null">
+        unit = #{unit,jdbcType=VARCHAR},
+      </if>
+      <if test="isSelected != null">
+        is_selected = #{isSelected,jdbcType=BIT},
+      </if>
+      <if test="isEssential != null">
+        is_essential = #{isEssential,jdbcType=BIT},
+      </if>
+      <if test="isSmart != null">
+        is_smart = #{isSmart,jdbcType=BIT},
+      </if>
+      <if test="brand != null">
+        brand = #{brand,jdbcType=VARCHAR},
+      </if>
+      <if test="origin != null">
+        origin = #{origin,jdbcType=VARCHAR},
+      </if>
+      <if test="code != null">
+        code = #{code,jdbcType=VARCHAR},
+      </if>
+      <if test="num != null">
+        num = #{num,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supply_id = #{supplyId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.SafetySupply">
+    update safety_supply
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      category_id = #{categoryId,jdbcType=INTEGER},
+      has_child = #{hasChild,jdbcType=BIT},
+      level = #{level,jdbcType=VARCHAR},
+      name = #{name,jdbcType=VARCHAR},
+      model_number = #{modelNumber,jdbcType=VARCHAR},
+      spec = #{spec,jdbcType=VARCHAR},
+      unit = #{unit,jdbcType=VARCHAR},
+      is_selected = #{isSelected,jdbcType=BIT},
+      is_essential = #{isEssential,jdbcType=BIT},
+      is_smart = #{isSmart,jdbcType=BIT},
+      brand = #{brand,jdbcType=VARCHAR},
+      origin = #{origin,jdbcType=VARCHAR},
+      code = #{code,jdbcType=VARCHAR},
+      num = #{num,jdbcType=SMALLINT},
+      description = #{description,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR}
+    where supply_id = #{supplyId,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select * from safety_supply;
+  </select>
+</mapper>

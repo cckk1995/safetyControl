@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.SupplyBindMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.SupplyBind">
+    <id column="supply_bind_id" jdbcType="INTEGER" property="supplyBindId" />
+    <result column="supply_procedure_id" jdbcType="INTEGER" property="supplyProcedureId" />
+    <result column="supply_id" jdbcType="INTEGER" property="supplyId" />
+    <result column="serv_staff_list" jdbcType="VARCHAR" property="servStaffList" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    supply_bind_id, supply_procedure_id, supply_id, serv_staff_list
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_supply_staff_bind
+    where supply_bind_id = #{supplyBindId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_supply_staff_bind
+    where supply_bind_id = #{supplyBindId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="supply_bind_id" keyProperty="supplyBindId" parameterType="com.chaikai.safetycontrol.pojo.SupplyBind" useGeneratedKeys="true">
+    insert into safety_supply_staff_bind (supply_procedure_id, supply_id, serv_staff_list
+      )
+    values (#{supplyProcedureId,jdbcType=INTEGER}, #{supplyId,jdbcType=INTEGER}, #{servStaffList,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="supply_bind_id" keyProperty="supplyBindId" parameterType="com.chaikai.safetycontrol.pojo.SupplyBind" useGeneratedKeys="true">
+    insert into safety_supply_staff_bind
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplyProcedureId != null">
+        supply_procedure_id,
+      </if>
+      <if test="supplyId != null">
+        supply_id,
+      </if>
+      <if test="servStaffList != null">
+        serv_staff_list,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplyProcedureId != null">
+        #{supplyProcedureId,jdbcType=INTEGER},
+      </if>
+      <if test="supplyId != null">
+        #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="servStaffList != null">
+        #{servStaffList,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.SupplyBind">
+    update safety_supply_staff_bind
+    <set>
+      <if test="supplyProcedureId != null">
+        supply_procedure_id = #{supplyProcedureId,jdbcType=INTEGER},
+      </if>
+      <if test="supplyId != null">
+        supply_id = #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="servStaffList != null">
+        serv_staff_list = #{servStaffList,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supply_bind_id = #{supplyBindId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.SupplyBind">
+    update safety_supply_staff_bind
+    set supply_procedure_id = #{supplyProcedureId,jdbcType=INTEGER},
+      supply_id = #{supplyId,jdbcType=INTEGER},
+      serv_staff_list = #{servStaffList,jdbcType=VARCHAR}
+    where supply_bind_id = #{supplyBindId,jdbcType=INTEGER}
+  </update>
+</mapper>

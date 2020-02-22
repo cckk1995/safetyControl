@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.ViolationCatMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.ViolationCat">
+    <id column="violation_category_id" jdbcType="INTEGER" property="violationCategoryId" />
+    <result column="violation_category" jdbcType="VARCHAR" property="violationCategory" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    violation_category_id, violation_category
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_violation_cat
+    where violation_category_id = #{violationCategoryId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_violation_cat
+    where violation_category_id = #{violationCategoryId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="violation_category_id" keyProperty="violationCategoryId" parameterType="com.chaikai.safetycontrol.pojo.ViolationCat" useGeneratedKeys="true">
+    insert into safety_violation_cat (violation_category)
+    values (#{violationCategory,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="violation_category_id" keyProperty="violationCategoryId" parameterType="com.chaikai.safetycontrol.pojo.ViolationCat" useGeneratedKeys="true">
+    insert into safety_violation_cat
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="violationCategory != null">
+        violation_category,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="violationCategory != null">
+        #{violationCategory,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.ViolationCat">
+    update safety_violation_cat
+    <set>
+      <if test="violationCategory != null">
+        violation_category = #{violationCategory,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where violation_category_id = #{violationCategoryId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.ViolationCat">
+    update safety_violation_cat
+    set violation_category = #{violationCategory,jdbcType=VARCHAR}
+    where violation_category_id = #{violationCategoryId,jdbcType=INTEGER}
+  </update>
+</mapper>

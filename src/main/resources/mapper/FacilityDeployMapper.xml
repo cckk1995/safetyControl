@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.FacilityDeployMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.FacilityDeploy">
+    <id column="deploy_id" jdbcType="INTEGER" property="deployId" />
+    <result column="package_id" jdbcType="INTEGER" property="packageId" />
+    <result column="procedure_id" jdbcType="INTEGER" property="procedureId" />
+    <result column="type_id" jdbcType="INTEGER" property="typeId" />
+    <result column="facility_detail_id" jdbcType="INTEGER" property="facilityDetailId" />
+    <result column="permit_persion_list" jdbcType="VARCHAR" property="permitPersionList" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    deploy_id, package_id, procedure_id, type_id, facility_detail_id, permit_persion_list, 
+    picture, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_facility_deploy
+    where deploy_id = #{deployId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_facility_deploy
+    where deploy_id = #{deployId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="deploy_id" keyProperty="deployId" parameterType="com.chaikai.safetycontrol.pojo.FacilityDeploy" useGeneratedKeys="true">
+    insert into safety_facility_deploy (package_id, procedure_id, type_id, 
+      facility_detail_id, permit_persion_list, picture, 
+      description)
+    values (#{packageId,jdbcType=INTEGER}, #{procedureId,jdbcType=INTEGER}, #{typeId,jdbcType=INTEGER}, 
+      #{facilityDetailId,jdbcType=INTEGER}, #{permitPersionList,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
+      #{description,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" keyColumn="deploy_id" keyProperty="deployId" parameterType="com.chaikai.safetycontrol.pojo.FacilityDeploy" useGeneratedKeys="true">
+    insert into safety_facility_deploy
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="procedureId != null">
+        procedure_id,
+      </if>
+      <if test="typeId != null">
+        type_id,
+      </if>
+      <if test="facilityDetailId != null">
+        facility_detail_id,
+      </if>
+      <if test="permitPersionList != null">
+        permit_persion_list,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="packageId != null">
+        #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null">
+        #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="facilityDetailId != null">
+        #{facilityDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="permitPersionList != null">
+        #{permitPersionList,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.FacilityDeploy">
+    update safety_facility_deploy
+    <set>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null">
+        procedure_id = #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="typeId != null">
+        type_id = #{typeId,jdbcType=INTEGER},
+      </if>
+      <if test="facilityDetailId != null">
+        facility_detail_id = #{facilityDetailId,jdbcType=INTEGER},
+      </if>
+      <if test="permitPersionList != null">
+        permit_persion_list = #{permitPersionList,jdbcType=VARCHAR},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where deploy_id = #{deployId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.FacilityDeploy">
+    update safety_facility_deploy
+    set package_id = #{packageId,jdbcType=INTEGER},
+      procedure_id = #{procedureId,jdbcType=INTEGER},
+      type_id = #{typeId,jdbcType=INTEGER},
+      facility_detail_id = #{facilityDetailId,jdbcType=INTEGER},
+      permit_persion_list = #{permitPersionList,jdbcType=VARCHAR},
+      picture = #{picture,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR}
+    where deploy_id = #{deployId,jdbcType=INTEGER}
+  </update>
+</mapper>

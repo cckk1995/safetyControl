@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.PkgNeedMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.PkgNeed">
+    <id column="supply_need_id" jdbcType="INTEGER" property="supplyNeedId" />
+    <result column="supply_id" jdbcType="INTEGER" property="supplyId" />
+    <result column="package_id" jdbcType="INTEGER" property="packageId" />
+    <result column="expected_num" jdbcType="SMALLINT" property="expectedNum" />
+    <result column="used_num" jdbcType="SMALLINT" property="usedNum" />
+    <result column="recycle_num" jdbcType="SMALLINT" property="recycleNum" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    supply_need_id, supply_id, package_id, expected_num, used_num, recycle_num, description
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from safety_supply_pkg_need
+    where supply_need_id = #{supplyNeedId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from safety_supply_pkg_need
+    where supply_need_id = #{supplyNeedId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="supply_need_id" keyProperty="supplyNeedId" parameterType="com.chaikai.safetycontrol.pojo.PkgNeed" useGeneratedKeys="true">
+    insert into safety_supply_pkg_need (supply_id, package_id, expected_num, 
+      used_num, recycle_num, description
+      )
+    values (#{supplyId,jdbcType=INTEGER}, #{packageId,jdbcType=INTEGER}, #{expectedNum,jdbcType=SMALLINT}, 
+      #{usedNum,jdbcType=SMALLINT}, #{recycleNum,jdbcType=SMALLINT}, #{description,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="supply_need_id" keyProperty="supplyNeedId" parameterType="com.chaikai.safetycontrol.pojo.PkgNeed" useGeneratedKeys="true">
+    insert into safety_supply_pkg_need
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="supplyId != null">
+        supply_id,
+      </if>
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="expectedNum != null">
+        expected_num,
+      </if>
+      <if test="usedNum != null">
+        used_num,
+      </if>
+      <if test="recycleNum != null">
+        recycle_num,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="supplyId != null">
+        #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="packageId != null">
+        #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="expectedNum != null">
+        #{expectedNum,jdbcType=SMALLINT},
+      </if>
+      <if test="usedNum != null">
+        #{usedNum,jdbcType=SMALLINT},
+      </if>
+      <if test="recycleNum != null">
+        #{recycleNum,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.PkgNeed">
+    update safety_supply_pkg_need
+    <set>
+      <if test="supplyId != null">
+        supply_id = #{supplyId,jdbcType=INTEGER},
+      </if>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="expectedNum != null">
+        expected_num = #{expectedNum,jdbcType=SMALLINT},
+      </if>
+      <if test="usedNum != null">
+        used_num = #{usedNum,jdbcType=SMALLINT},
+      </if>
+      <if test="recycleNum != null">
+        recycle_num = #{recycleNum,jdbcType=SMALLINT},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where supply_need_id = #{supplyNeedId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.PkgNeed">
+    update safety_supply_pkg_need
+    set supply_id = #{supplyId,jdbcType=INTEGER},
+      package_id = #{packageId,jdbcType=INTEGER},
+      expected_num = #{expectedNum,jdbcType=SMALLINT},
+      used_num = #{usedNum,jdbcType=SMALLINT},
+      recycle_num = #{recycleNum,jdbcType=SMALLINT},
+      description = #{description,jdbcType=VARCHAR}
+    where supply_need_id = #{supplyNeedId,jdbcType=INTEGER}
+  </update>
+</mapper>

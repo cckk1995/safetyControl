@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chaikai.safetycontrol.dao.FacilityChangeApplicationMapper">
+  <resultMap id="BaseResultMap" type="com.chaikai.safetycontrol.pojo.FacilityChangeApplication">
+    <id column="application_id" jdbcType="INTEGER" property="applicationId" />
+    <result column="aupply_id" jdbcType="INTEGER" property="aupplyId" />
+    <result column="package_id" jdbcType="INTEGER" property="packageId" />
+    <result column="procedure_id" jdbcType="INTEGER" property="procedureId" />
+    <result column="applicant_id" jdbcType="INTEGER" property="applicantId" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="promised_recovery_time" jdbcType="TIMESTAMP" property="promisedRecoveryTime" />
+    <result column="picture" jdbcType="VARCHAR" property="picture" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="change_time" jdbcType="TIMESTAMP" property="changeTime" />
+    <result column="recovery_time" jdbcType="TIMESTAMP" property="recoveryTime" />
+    <result column="application_type" jdbcType="BIT" property="applicationType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    application_id, aupply_id, package_id, procedure_id, applicant_id, description, promised_recovery_time, 
+    picture, status, change_time, recovery_time, application_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from facility_change_application
+    where application_id = #{applicationId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from facility_change_application
+    where application_id = #{applicationId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="application_id" keyProperty="applicationId" parameterType="com.chaikai.safetycontrol.pojo.FacilityChangeApplication" useGeneratedKeys="true">
+    insert into facility_change_application (aupply_id, package_id, procedure_id, 
+      applicant_id, description, promised_recovery_time, 
+      picture, status, change_time, 
+      recovery_time, application_type)
+    values (#{aupplyId,jdbcType=INTEGER}, #{packageId,jdbcType=INTEGER}, #{procedureId,jdbcType=INTEGER}, 
+      #{applicantId,jdbcType=INTEGER}, #{description,jdbcType=VARCHAR}, #{promisedRecoveryTime,jdbcType=TIMESTAMP}, 
+      #{picture,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{changeTime,jdbcType=TIMESTAMP}, 
+      #{recoveryTime,jdbcType=TIMESTAMP}, #{applicationType,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" keyColumn="application_id" keyProperty="applicationId" parameterType="com.chaikai.safetycontrol.pojo.FacilityChangeApplication" useGeneratedKeys="true">
+    insert into facility_change_application
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="aupplyId != null">
+        aupply_id,
+      </if>
+      <if test="packageId != null">
+        package_id,
+      </if>
+      <if test="procedureId != null">
+        procedure_id,
+      </if>
+      <if test="applicantId != null">
+        applicant_id,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="promisedRecoveryTime != null">
+        promised_recovery_time,
+      </if>
+      <if test="picture != null">
+        picture,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="changeTime != null">
+        change_time,
+      </if>
+      <if test="recoveryTime != null">
+        recovery_time,
+      </if>
+      <if test="applicationType != null">
+        application_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="aupplyId != null">
+        #{aupplyId,jdbcType=INTEGER},
+      </if>
+      <if test="packageId != null">
+        #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null">
+        #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="applicantId != null">
+        #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="promisedRecoveryTime != null">
+        #{promisedRecoveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picture != null">
+        #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTime != null">
+        #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recoveryTime != null">
+        #{recoveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationType != null">
+        #{applicationType,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.chaikai.safetycontrol.pojo.FacilityChangeApplication">
+    update facility_change_application
+    <set>
+      <if test="aupplyId != null">
+        aupply_id = #{aupplyId,jdbcType=INTEGER},
+      </if>
+      <if test="packageId != null">
+        package_id = #{packageId,jdbcType=INTEGER},
+      </if>
+      <if test="procedureId != null">
+        procedure_id = #{procedureId,jdbcType=INTEGER},
+      </if>
+      <if test="applicantId != null">
+        applicant_id = #{applicantId,jdbcType=INTEGER},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="promisedRecoveryTime != null">
+        promised_recovery_time = #{promisedRecoveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="picture != null">
+        picture = #{picture,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="changeTime != null">
+        change_time = #{changeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="recoveryTime != null">
+        recovery_time = #{recoveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="applicationType != null">
+        application_type = #{applicationType,jdbcType=BIT},
+      </if>
+    </set>
+    where application_id = #{applicationId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.chaikai.safetycontrol.pojo.FacilityChangeApplication">
+    update facility_change_application
+    set aupply_id = #{aupplyId,jdbcType=INTEGER},
+      package_id = #{packageId,jdbcType=INTEGER},
+      procedure_id = #{procedureId,jdbcType=INTEGER},
+      applicant_id = #{applicantId,jdbcType=INTEGER},
+      description = #{description,jdbcType=VARCHAR},
+      promised_recovery_time = #{promisedRecoveryTime,jdbcType=TIMESTAMP},
+      picture = #{picture,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      change_time = #{changeTime,jdbcType=TIMESTAMP},
+      recovery_time = #{recoveryTime,jdbcType=TIMESTAMP},
+      application_type = #{applicationType,jdbcType=BIT}
+    where application_id = #{applicationId,jdbcType=INTEGER}
+  </update>
+</mapper>

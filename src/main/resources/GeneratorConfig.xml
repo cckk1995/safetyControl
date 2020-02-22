@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <!-- 本地硬盘数据库驱动包 -->
+    <classPathEntry location="E:\Maven_Repo\mysql\mysql-connector-java\8.0.19\mysql-connector-java-8.0.19.jar" />
+
+    <context id="Mybatis3Context" targetRuntime="MyBatis3">
+
+        <property name="javaFileEncoding" value="UTF-8"/>
+
+        <commentGenerator>
+            <!-- 去掉生成日期那行注释 -->
+            <property name="suppressDate" value="true"/>
+            <!-- 是否去除自动生成所有的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/safetycontrol?useLegacyDatetimeCode=false&amp;serverTimezone=UTC&amp;nullCatalogMeansCurrent=true"
+                        userId="root"
+                        password="123456">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- 模型的包名和位置-->
+        <javaModelGenerator targetPackage="com.chaikai.safetycontrol.pojo" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- 映射文件的包名和位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject="./src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <!-- DAO的包名和位置-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.chaikai.safetycontrol.dao" targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <table tableName="safety_supply" domainObjectName="SafetySupply" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="supply_id" sqlStatement="JDBC"/>
+        </table>
+
+        <!--
+
+        <table tableName="safety_supply_category" domainObjectName="SupplyCategory" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="category_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_supply_detail" domainObjectName="SupplyDetail" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="supply_detail_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_violation_alert" domainObjectName="ViolationAlert" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="alert_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_violation_cat" domainObjectName="ViolationCat" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="violation_category_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_type_bind" domainObjectName="TypeBind" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="bind_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_violation" domainObjectName="Violation" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="violation_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_supply_pkg_need" domainObjectName="PkgNeed" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="supply_need_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_supply_proc_need" domainObjectName="ProcNeed" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="supply_procedure_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_facility_deploy" domainObjectName="FacilityDeploy" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="deploy_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_supply_staff_bind" domainObjectName="SupplyBind" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="supply_bind_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="facility_change_application" domainObjectName="FacilityChangeApplication" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="application_id" sqlStatement="JDBC"/>
+        </table>
+        <table tableName="safety_violation_flow" domainObjectName="ViolationFlow" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="violation_flow_id" sqlStatement="JDBC"/>
+        </table>
+
+
+
+        <table tableName="user" domainObjectName="User" enableCountByExample="false"
+               enableUpdateByExample="false"
+               enableDeleteByExample="false"
+               enableSelectByExample="false" selectByExampleQueryId="false">
+            <generatedKey column="user_id" sqlStatement="JDBC"/>
+        </table>
+
+        -->
+
+    </context>
+
+</generatorConfiguration>
